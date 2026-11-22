@@ -5,7 +5,7 @@
     --color-rosa: #f4c2c2;
     --letra-oscura: #4a3e3d;
     --letra-gris: #6e6565;
-    --fondo-crema:#fee2b3;
+    --fondo-crema:#3e2b0b;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
