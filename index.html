@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mírwen - Proyecto Maternidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Enlace a nuestra hoja de estilos separada -->
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="titulo-logo">Mírwen</a>
+            <div class="boton-cel" id="menuCel"><i class="fa-solid fa-bars"></i></div>
+            <div class="enlaces-menu" id="listaLinks">
+                <a href="#inicio">Inicio</a>
+                <a href="#consejos">Guía</a>
+                <a href="#donaciones">Donaciones</a>
+                <button class="abrir-chat boton-menu">Consultar IA</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Portada -->
+        <section class="portada" id="inicio">
+            <div class="texto-portada">
+                <h1>Acompañamiento en tu embarazo</h1>
+                <p>Apoyo, guías prácticas y asistencia con inteligencia artificial disponible las 24 horas.</p>
+                <div class="grupo-botones">
+                    <button class="abrir-chat boton-rosa"><i class="fa-solid fa-comments"></i> Hablar con IA</button>
+                    <a href="#consejos" class="boton-borde">Ver Guías</a>
+                    <a href="#donaciones" class="boton-borde"><i class="fa-solid fa-heart"></i> Apoyar Proyecto</a>
+                </div>
+            </div>
+            <div class="foto-circulo">
+                <img src="osoreal2.jpg" alt="Maternidad">
+            </div>
+        </section>
+
+        <!-- Guías -->
+        <section class="seccion-consejos" id="consejos">
+            <h2>Guía para Futuras Mamás</h2>
+            <div class="botones-temas">
+                <button class="btn-tema activo" data-caja="tema1">Nutrición</button>
+                <button class="btn-tema" data-caja="tema2">Ejercicio</button>
+                <button class="btn-tema" data-caja="tema3">Descanso</button>
+                <button class="btn-tema" data-caja="tema4">Parto</button>
+            </div>
+
+            <div class="caja-tema activo" id="tema1">
+                <h3>Alimentación y Nutrición</h3>
+                <div class="dos-columnas">
+                    <div class="tarjetita">
+                        <h4>Recomendados</h4>
+                        <ul>
+                            <li><strong>Ácido Fólico:</strong> Espinacas, legumbres.</li>
+                            <li><strong>Hierro y Proteína:</strong> Carnes magras, huevos cocidos.</li>
+                            <li><strong>Calcio:</strong> Yogurt, lácteos pasteurizados.</li>
+                        </ul>
+                    </div>
+                    <div class="tarjetita">
+                        <h4>A evitar</h4>
+                        <ul>
+                            <li>Carnes o pescados crudos (sushi).</li>
+                            <li>Lácteos sin pasteurizar.</li>
+                            <li>Exceso de cafeína y alcohol.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="aviso-ia">
+                    <span>¿Dudas sobre un alimento?</span>
+                    <button class="abrir-chat boton-menu">Preguntar a IA</button>
+                </div>
+            </div>
+
+            <div class="caja-tema" id="tema2">
+                <h3>Ejercicio Físico</h3>
+                <div class="dos-columnas">
+                    <div class="tarjetita">
+                        <h4>Beneficiosos</h4>
+                        <ul>
+                            <li>Caminatas diarias (20-30 min).</li>
+                            <li>Yoga prenatal.</li>
+                            <li>Pilates adaptado.</li>
+                        </ul>
+                    </div>
+                    <div class="tarjetita">
+                        <h4>Precauciones</h4>
+                        <ul>
+                            <li>Evitar deportes de impacto o caídas.</li>
+                            <li>Evitar sobreesfuerzos abdominales.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="caja-tema" id="tema3">
+                <h3>Bienestar y Sueño</h3>
+                <div class="dos-columnas">
+                    <div class="tarjetita">
+                        <h4>Para el descanso</h4>
+                        <ul>
+                            <li>Dormir sobre el lado izquierdo.</li>
+                            <li>Usar almohada entre las piernas.</li>
+                        </ul>
+                    </div>
+                    <div class="tarjetita">
+                        <h4>Salud emocional</h4>
+                        <ul>
+                            <li>Expresar emociones con tu red de apoyo.</li>
+                            <li>Practicar ejercicios de respiración.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="caja-tema" id="tema4">
+                <h3>Preparación para el Parto</h3>
+                <div class="dos-columnas">
+                    <div class="tarjetita">
+                        <h4>Maleta del Hospital</h4>
+                        <ul>
+                            <li>Documentos e historial médico.</li>
+                            <li>Ropa cómoda para mamá y bebé.</li>
+                            <li>Artículos de aseo.</li>
+                        </ul>
+                    </div>
+                    <div class="tarjetita">
+                        <h4>Cuándo acudir al médico</h4>
+                        <ul>
+                            <li>Contracciones cada 5 minutos.</li>
+                            <li>Ruptura de fuente o sangrado.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donaciones -->
+        <section class="seccion-donaciones" id="donaciones">
+            <div class="encabezado-donaciones">
+                <h2>Apoya nuestro proyecto</h2>
+                <p>Tu aportación nos ayuda a mantener gratuita la asistencia y las guías para futuras mamás.</p>
+            </div>
+            <div class="caja-canasta">
+               
+                <form class="formulario-pago" id="datosDonacion" onsubmit="hacerDonacion(event)">
+                    <input type="text" id="nombreCliente" placeholder="Nombre completo de quien está donando" required>
+                    <input type="number" id="montoDonacion" placeholder="Monto a donar en pesos ($ MXN)" min="10" required>
+                    <select id="tipoPago" onchange="revisarMetodo()" required>
+                        <option value="tarjeta">Tarjeta de Crédito / Débito</option>
+                        <option value="transferencia">Transferencia Bancaria (SPEI)</option>
+                    </select>
+                    <div id="cajaTarjeta" style="display: flex; flex-direction: column; gap: 8px;">
+                        <input type="text" id="numeroTarj" placeholder="Número de tarjeta (16 dígitos)" maxlength="16">
+                        <div class="dos-campos">
+                            <input type="text" id="fechaTarj" placeholder="MM/AA" maxlength="5">
+                            <input type="password" id="codigoTarj" placeholder="CVV" maxlength="3">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-comprar-ya">
+                        Confirmar y donar
+                    </button>
+                </form>
+                <div class="ticket-donacion" id="notaFinal"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Ventana del Chat -->
+    <div class="fondo-chat" id="ventanaChat">
+        <div class="cuadro-chat">
+            <div class="arriba-chat">
+                <span>Asistente Mírwen</span>
+                <button id="btnSalirChat" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="mensajes-chat" id="zonaMensajes">
+                <div class="globo bot">Hola, ¿en qué puedo ayudarte con tu embarazo?</div>
+            </div>
+            <div class="abajo-chat">
+                <input type="text" id="cajaTexto" placeholder="Escribe tu consulta...">
+                <button id="btnMandar"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Mírwen. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Enlace a nuestro archivo de JavaScript separado -->
+    <script src="script.js"></script>
+</body>
+</html>
