@@ -1,38 +1,38 @@
-// Pestañas y temas
+// Cambiar entre las pestañas de temas
 var botonesTemas = document.querySelectorAll('.btn-tema');
 var cajasTemas = document.querySelectorAll('.caja-tema');
 for (var i = 0; i < botonesTemas.length; i++) {
     botonesTemas[i].addEventListener('click', function() {
-        // Oculta todas las cajas y desactiva los botones
+        // Quitar lo activo a todos primero
         for (var j = 0; j < botonesTemas.length; j++) {
             botonesTemas[j].classList.remove('activo');
             cajasTemas[j].classList.remove('activo');
         }
-        // Muestra la caja del botón seleccionado
+        // Activar solo el boton al que le dieron clic y mostrar su caja
         this.classList.add('activo');
         document.getElementById(this.getAttribute('data-caja')).classList.add('activo');
     });
 }
 
-// Menú celular
+// Abrir y cerrar el menu en celular
 document.getElementById('menuCel').addEventListener('click', function() {
     document.getElementById('listaLinks').classList.toggle('abierto');
 });
 
-// Mostrar u ocultar datos de tarjeta según el método elegido
+// Mostrar u ocultar los cuadros de tarjeta segun lo que elijan
 function revisarMetodo() {
     var opcion = document.getElementById('tipoPago').value;
     document.getElementById('cajaTarjeta').style.display = (opcion === 'tarjeta') ? 'flex' : 'none';
 }
 
-// Procesar donación
+// Funcion para cuando envian la donacion
 function hacerDonacion(evento) {
-    evento.preventDefault(); // Evita que se recargue la página
+    evento.preventDefault(); // Para que no se recargue la pagina sola
     var donante = document.getElementById('nombreCliente').value.trim();
     var monto = document.getElementById('montoDonacion').value.trim();
     var metodo = document.getElementById('tipoPago').value;
 
-    // Valida los campos si eligió tarjeta
+    // Checar que los datos de la tarjeta esten completos
     if (metodo === 'tarjeta') {
         var numT = document.getElementById('numeroTarj').value.trim();
         var fecT = document.getElementById('fechaTarj').value.trim();
@@ -43,13 +43,13 @@ function hacerDonacion(evento) {
         }
     }
 
-    // Genera un folio aleatorio y define el texto según el método de pago
+    // Inventar un numero de folio al azar y armar el texto del pago
     var folioDonacion = 'DON-' + Math.floor(100000 + Math.random() * 900000);
     var detalleMetodo = (metodo === 'tarjeta') 
         ? 'Donación con tarjeta procesada con éxito.' 
         : 'CLABE SPEI para transferir: 012180001234567890 (Banco BBVA - Mírwen).';
 
-    // Muestra el comprobante de donación
+    // Poner el recibo en pantalla
     var recibo = document.getElementById('notaFinal');
     recibo.style.display = 'block';
     recibo.innerHTML = '<strong><i class="fa-solid fa-heart" style="color: #d86c70;"></i> ¡Gracias por donar a nuestro proyecto, ' + donante + '!</strong><br>' +
@@ -57,17 +57,17 @@ function hacerDonacion(evento) {
                        'Folio de apoyo: <strong>' + folioDonacion + '</strong><br>' +
                        '<span>' + detalleMetodo + '</span>';
 
-    // Limpia el formulario
+    // Borrar lo que escribieron en el formulario
     document.getElementById('datosDonacion').reset();
     revisarMetodo();
 }
 
-// Chat con IA
+// Variables para la ventana del chat
 var ventanaChat = document.getElementById('ventanaChat');
 var zonaMensajes = document.getElementById('zonaMensajes');
 var cajaTexto = document.getElementById('cajaTexto');
 
-// Historial de mensajes e instrucciones iniciales de Mírwen
+// Instrucciones de como se debe portar el bot y los links que puede dar
 var listaMensajes = [
     {
         role: "system",
@@ -75,44 +75,44 @@ var listaMensajes = [
     }
 ];
 
-// Abrir y cerrar la ventana del chat
+// Botones para abrir y cerrar el chat
 var botonesAbrir = document.querySelectorAll('.abrir-chat');
 for (var k = 0; k < botonesAbrir.length; k++) {
     botonesAbrir[k].addEventListener('click', function() { ventanaChat.classList.add('abierto'); });
 }
 document.getElementById('btnSalirChat').addEventListener('click', function() { ventanaChat.classList.remove('abierto'); });
 
-// Enviar pregunta a Groq y mostrar la respuesta
+// Funcion que manda la pregunta a la IA y trae la respuesta
 async function mandarPregunta() {
     var textoUsuario = cajaTexto.value.trim();
-    if (textoUsuario === '') return;
+    if (textoUsuario === '') return; // Si no escribieron nada no hace nada
 
-    // Muestra el mensaje del usuario y lo guarda en el historial
+    // Poner el mensaje del usuario en la pantalla y guardarlo en la lista
     zonaMensajes.innerHTML += '<div class="globo yo">' + textoUsuario + '</div>';
     cajaTexto.value = '';
     zonaMensajes.scrollTop = zonaMensajes.scrollHeight;
     listaMensajes.push({ role: "user", content: textoUsuario });
 
-    // Muestra indicador de carga mientras responde la IA
+    // Poner mensaje temporal mientras contesta
     var idEspera = 'espera-' + Date.now();
     zonaMensajes.innerHTML += '<div class="globo bot" id="' + idEspera + '"><i>Mírwen está escribiendo...</i></div>';
     zonaMensajes.scrollTop = zonaMensajes.scrollHeight;
 
-    // Arma la clave de API
+    // Juntar la llave de Groq
     var pedazo1 = "gsk_VSRDv4BN836yV7";
     var pedazo2 = "9ZnC6YWGdyb3FY1cbb";
     var pedazo3 = "6F3bY2jql2OShNJN4V3Y";
     var miLlave = pedazo1 + pedazo2 + pedazo3;
 
     try {
-        // Consulta los modelos disponibles en Groq
+        // Pedir la lista de modelos disponibles
         var peticionModelos = await fetch("https://api.groq.com/openai/v1/models", {
             headers: { "Authorization": "Bearer " + miLlave }
         });
         var listaModelos = await peticionModelos.json();
         if (!peticionModelos.ok) throw new Error("Error de clave (" + peticionModelos.status + ")");
 
-        // Elige un modelo activo de texto
+        // Buscar un modelo que sirva para platicar
         var nombreModelo = "llama-3.3-70b-versatile";
         for (var m = 0; m < listaModelos.data.length; m++) {
             var idActual = listaModelos.data[m].id;
@@ -122,7 +122,7 @@ async function mandarPregunta() {
             }
         }
 
-        // Envía la conversación para obtener la respuesta
+        // Mandar todos los mensajes para que conteste el bot
         var respuestaServidor = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Authorization": "Bearer " + miLlave },
@@ -131,21 +131,4 @@ async function mandarPregunta() {
         var datosRespuesta = await respuestaServidor.json();
         if (!respuestaServidor.ok) {
             var msgErr = datosRespuesta.error ? datosRespuesta.error.message : respuestaServidor.status;
-            throw new Error("Código " + respuestaServidor.status + ": " + msgErr);
-        }
-
-        // Guarda la respuesta, convierte las URLs en enlaces clicables y la muestra en el chat
-        var textoBot = datosRespuesta.choices[0].message.content;
-        listaMensajes.push({ role: "assistant", content: textoBot });
-        var textoConLinks = textoBot.replace(/(https?:\/\/[^\s.,!?]+)/g, '<a href="$1" target="_blank">$1</a>');
-        document.getElementById(idEspera).innerHTML = textoConLinks;
-    } catch (err) {
-        console.error("Fallo:", err);
-        document.getElementById(idEspera).innerHTML = "Error técnico: " + err.message;
-    }
-    zonaMensajes.scrollTop = zonaMensajes.scrollHeight;
-}
-
-// Eventos para enviar con clic o presionando Enter
-document.getElementById('btnMandar').addEventListener('click', mandarPregunta);
-cajaTexto.addEventListener('keypress', function(tecla) { if (tecla.key === 'Enter') mandarPregunta(); });
+            throw new Error("Código "
