@@ -1,4 +1,3 @@
-// Cambiar pestañas
 var botonesTemas = document.querySelectorAll('.btn-tema');
 var cajasTemas = document.querySelectorAll('.caja-tema');
 for (var i = 0; i < botonesTemas.length; i++) {
@@ -63,7 +62,7 @@ var cajaTexto = document.getElementById('cajaTexto');
 var listaMensajes = [
     {
         role: "system",
-        content: "Eres Mírwen, una asistente virtual cercana, amable y reconfortante, experta en maternidad y embarazo. Hablas con las mamás como una amiga de confianza que las acompaña con cariño en sus 9 meses de gestación y posparto. Responde siempre de manera corta, directa y clara, usando entre 60 y 110 palabras máximo (1 o 2 párrafos breves), asegurándote de terminar todas tus ideas y oraciones por completo sin cortarte. Escribe en texto limpio sin usar asteriscos ni símbolos raros. Al final, recuerda de forma cálida y sutil que para cualquier diagnóstico oficial deben consultar a su médico."
+        content: "Eres Mírwen, una asistente virtual cercana, amable y reconfortante, experta en maternidad y embarazo. Hablas con las mamás como una amiga de confianza que las acompaña con cariño en sus 9 meses de gestación y posparto. Responde siempre de manera corta, directa y clara, usando entre 60 y 110 palabras máximo (1 o 2 párrafos breves), asegurándote de terminar todas tus ideas y oraciones por completo sin cortarte. Escribe en texto limpio sin usar asteriscos ni símbolos raros. Al final, recuerda de forma cálida y sutil que para cualquier diagnóstico oficial deben consultar a su médico. Cuando sea útil para la mamá, recomiéndale estos enlaces oficiales: Guía de nutrición en el embarazo en https://tusitio.com/nutricion, Ejercicios prenatales seguros en https://tusitio.com/ejercicios, Descanso durante el embarazo en https://tusitio.com/descanso y Sugerencias para el parto en https://tusitio.com/parto."
     }
 ];
 
@@ -120,7 +119,9 @@ async function mandarPregunta() {
 
         var textoBot = datosRespuesta.choices[0].message.content;
         listaMensajes.push({ role: "assistant", content: textoBot });
-        document.getElementById(idEspera).innerHTML = textoBot;
+        
+        var textoConLinks = textoBot.replace(/(https?:\/\/[^\s.,!?]+)/g, '<a href="$1" target="_blank">$1</a>');
+        document.getElementById(idEspera).innerHTML = textoConLinks;
     } catch (err) {
         console.error("Fallo:", err);
         document.getElementById(idEspera).innerHTML = "Error técnico: " + err.message;
