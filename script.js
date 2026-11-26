@@ -85,12 +85,31 @@ async function mandarPregunta() {
     var llave = "gsk_VSRDv4BN836yV7" + "9ZnC6YWGdyb3FY1cbb" + "6F3bY2jql2OShNJN4V3Y";
 
     try {
+        // 1. Buscar un modelo activo automaticamente
+        var resMod = await fetch("https://api.groq.com/openai/v1/models", {
+            headers: { "Authorization": "Bearer " + llave }
+        });
+        var dataMod = await resMod.json();
+        if (!resMod.ok) throw new Error("Clave inválida (" + resMod.status + ")");
+
+        var modeloActivo = "llama-3.3-70b-versatile";
+        for (var m = 0; m < dataMod.data.length; m++) {
+            var id = dataMod.data[m].id;
+            if ((id.includes("llama") || id.includes("gpt-oss")) && !id.includes("guard")) {
+                modeloActivo = id;
+                break;
+            }
+        }
+
+        // 2. Pedir respuesta al modelo
         var res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Authorization": "Bearer " + llave },
-            body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: historial, max_tokens: 500 })
+            body: JSON.stringify({ model: modeloActivo, messages: historial, max_tokens: 500 })
         });
         var data = await res.json();
+        if (!res.ok) throw new Error(data.error ? data.error.message : "Error " + res.status);
+
         var respuesta = data.choices[0].message.content;
 
         // Hacer que los links se puedan cliquear y respetar saltos de linea
@@ -102,7 +121,7 @@ async function mandarPregunta() {
         historial.push({ role: "assistant", content: respuesta });
         mensajes.scrollTop = mensajes.scrollHeight;
     } catch (err) {
-        document.getElementById(idCarga).innerHTML = "Error al conectar con la IA.";
+        document.getElementById(idCarga).innerHTML = "No se pudo conectar: " + err.message;
     }
 }
 
