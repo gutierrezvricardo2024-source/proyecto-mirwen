@@ -114,7 +114,7 @@ async function mandarPregunta() {
 
         // Hacer que los links se puedan cliquear y respetar saltos de linea
         var textoConLinks = respuesta
-            .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color:#f5bcbf; text-decoration:underline;">$1</a>')
+            .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color:#ffd1e5; text-decoration:underline;">$1</a>')
             .replace(/\n/g, '<br>');
 
         document.getElementById(idCarga).innerHTML = textoConLinks;
