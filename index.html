@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Codificación de caracteres y escalado responsive para móviles y escritorio -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mírwen - Proyecto Maternidad</title>
+
+    <!-- Tipografía Quicksand y librería de íconos Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Enlace a nuestra hoja de estilos separada -->
+
+    <!-- Hoja de estilos principal -->
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
+    <!-- Encabezado y barra de navegación -->
     <header>
         <nav>
             <a href="#" class="titulo-logo">Mírwen</a>
+            <!-- Botón hamburguesa para menú en dispositivos móviles -->
             <div class="boton-cel" id="menuCel"><i class="fa-solid fa-bars"></i></div>
+            <!-- Enlaces de navegación y botón para abrir el chat con IA -->
             <div class="enlaces-menu" id="listaLinks">
                 <a href="#inicio">Inicio</a>
                 <a href="#consejos">Guía</a>
@@ -24,26 +31,30 @@
         </nav>
     </header>
 
+    <!-- Contenido principal de la página -->
     <main>
-        <!-- Portada -->
+        <!-- Sección de portada / bienvenida -->
         <section class="portada" id="inicio">
             <div class="texto-portada">
                 <h1>Acompañamiento en tu embarazo</h1>
                 <p>Apoyo, guías prácticas y asistencia con inteligencia artificial disponible las 24 horas.</p>
+                <!-- Botones de acción rápida -->
                 <div class="grupo-botones">
                     <button class="abrir-chat boton-rosa"><i class="fa-solid fa-comments"></i> Hablar con IA</button>
                     <a href="#consejos" class="boton-borde">Ver Guías</a>
                     <a href="#donaciones" class="boton-borde"><i class="fa-solid fa-heart"></i> Apoyar Proyecto</a>
                 </div>
             </div>
+            <!-- Imagen ilustrativa de la portada -->
             <div class="foto-circulo">
                 <img src="osoreal2.jpg" alt="Maternidad">
             </div>
         </section>
 
-        <!-- Guías -->
+        <!-- Sección de guías temáticas por pestañas -->
         <section class="seccion-consejos" id="consejos">
             <h2>Guía para Futuras Mamás</h2>
+            <!-- Botones que alternan entre las cajas de temas (controlados por data-caja) -->
             <div class="botones-temas">
                 <button class="btn-tema activo" data-caja="tema1">Nutrición</button>
                 <button class="btn-tema" data-caja="tema2">Ejercicio</button>
@@ -51,6 +62,7 @@
                 <button class="btn-tema" data-caja="tema4">Parto</button>
             </div>
 
+            <!-- Tema 1: Nutrición -->
             <div class="caja-tema activo" id="tema1">
                 <h3>Alimentación y Nutrición</h3>
                 <div class="dos-columnas">
@@ -71,12 +83,14 @@
                         </ul>
                     </div>
                 </div>
+                <!-- Acceso directo al chat de IA desde nutrición -->
                 <div class="aviso-ia">
                     <span>¿Dudas sobre un alimento?</span>
                     <button class="abrir-chat boton-menu">Preguntar a IA</button>
                 </div>
             </div>
 
+            <!-- Tema 2: Ejercicio -->
             <div class="caja-tema" id="tema2">
                 <h3>Ejercicio Físico</h3>
                 <div class="dos-columnas">
@@ -98,6 +112,7 @@
                 </div>
             </div>
 
+            <!-- Tema 3: Descanso -->
             <div class="caja-tema" id="tema3">
                 <h3>Bienestar y Sueño</h3>
                 <div class="dos-columnas">
@@ -118,6 +133,7 @@
                 </div>
             </div>
 
+            <!-- Tema 4: Parto -->
             <div class="caja-tema" id="tema4">
                 <h3>Preparación para el Parto</h3>
                 <div class="dos-columnas">
@@ -140,49 +156,55 @@
             </div>
         </section>
 
-        <!-- Donaciones -->
+        <!-- Sección de donaciones -->
         <section class="seccion-donaciones" id="donaciones">
             <div class="encabezado-donaciones">
                 <h2>Apoya nuestro proyecto</h2>
                 <p>Tu aportación nos ayuda a mantener gratuita la asistencia y las guías para futuras mamás.</p>
             </div>
             <div class="caja-canasta">
-               
+                <!-- Formulario procesado por hacerDonacion() en script.js -->
                 <form class="formulario-pago" id="datosDonacion" onsubmit="hacerDonacion(event)">
                     <input type="text" id="nombreCliente" placeholder="Nombre completo de quien está donando" required>
                     <input type="number" id="montoDonacion" placeholder="Monto a donar en pesos ($ MXN)" min="10" required>
+                    <!-- Cambia la visibilidad de los campos de tarjeta vía revisarMetodo() -->
                     <select id="tipoPago" onchange="revisarMetodo()" required>
                         <option value="tarjeta">Tarjeta de Crédito / Débito</option>
                         <option value="transferencia">Transferencia Bancaria (SPEI)</option>
                     </select>
+
+                    <!-- Campos exclusivos para pago con tarjeta -->
                     <div id="cajaTarjeta" style="display: flex; flex-direction: column; gap: 8px;">
                         <input type="text" id="numeroTarj" placeholder="Número de tarjeta (16 dígitos)" maxlength="16">
-                     </div>
-                        <div class="un-campo" style="display: flex; flex-direction: column; gap: 8px;">
-                            <input type="text" id="fechaTarj" placeholder="MM/AA" maxlength="5">
-                        </div>
-                        <div class="un-campo" style="display: flex; flex-direction: column; gap: 8px;">
-                            <input type="text" id="codigo-seg" placeholder="CVV" maxlength="3">
-                        </div>
-                    <button type="submit" class="btn-comprar-ya">
-                        Confirmar y donar
-                    </button>
+                    </div>
+                    <div class="un-campo" style="display: flex; flex-direction: column; gap: 8px;">
+                        <input type="text" id="fechaTarj" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    <div class="un-campo" style="display: flex; flex-direction: column; gap: 8px;">
+                        <input type="text" id="codigo-seg" placeholder="CVV" maxlength="3">
+                    </div>
+
+                    <button type="submit" class="btn-comprar-ya">Confirmar y donar</button>
                 </form>
+                <!-- Contenedor donde se muestra el comprobante/ticket tras donar -->
                 <div class="ticket-donacion" id="notaFinal"></div>
             </div>
         </section>
     </main>
 
-    <!-- Ventana del Chat -->
+    <!-- Ventana modal del asistente de IA -->
     <div class="fondo-chat" id="ventanaChat">
         <div class="cuadro-chat">
             <div class="arriba-chat">
                 <span>Asistente Mírwen</span>
+                <!-- Botón para cerrar la ventana del chat -->
                 <button id="btnSalirChat" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
             </div>
+            <!-- Historial de mensajes del chat -->
             <div class="mensajes-chat" id="zonaMensajes">
                 <div class="globo bot">Hola, ¿en qué puedo ayudarte con tu embarazo?</div>
             </div>
+            <!-- Entrada de texto y botón de envío -->
             <div class="abajo-chat">
                 <input type="text" id="cajaTexto" placeholder="Escribe tu consulta...">
                 <button id="btnMandar"><i class="fa-solid fa-paper-plane"></i></button>
@@ -190,11 +212,12 @@
         </div>
     </div>
 
+    <!-- Pie de página -->
     <footer>
         <p>&copy; 2026 Mírwen. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Enlace a nuestro archivo de JavaScript separado -->
+    <!-- Lógica interactiva de la página -->
     <script src="script.js"></script>
 </body>
 </html>
