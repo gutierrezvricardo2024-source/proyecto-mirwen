@@ -1,9 +1,7 @@
 // Cambiar pestanas de la guia
 var btns = document.querySelectorAll('.btn-tema');
 var cajas = document.querySelectorAll('.caja-tema');
-var textoConLinks = respuesta
-            .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color:#ffd1e5; text-decoration:underline;">$1</a>')
-            .replace(/\n/g, '<br>');
+
 for (var i = 0; i < btns.length; i++) {
     btns[i].onclick = function() {
         for (var j = 0; j < btns.length; j++) {
