@@ -36,7 +36,7 @@ function hacerDonacion(evento) {
     if (metodo === 'tarjeta') {
         var numT = document.getElementById('numeroTarj').value.trim();
         var fecT = document.getElementById('fechaTarj').value.trim();
-        var codT = document.getElementById('codigoTarj').value.trim();
+        var codT = document.getElementById('codigo-seg').value.trim();
         if (numT.length < 16 || fecT === '' || codT.length < 3) {
             alert("Por favor completa correctamente los datos de tu tarjeta (16 dígitos, fecha y CVV).");
             return;
@@ -78,9 +78,13 @@ var listaMensajes = [
 // Botones para abrir y cerrar el chat
 var botonesAbrir = document.querySelectorAll('.abrir-chat');
 for (var k = 0; k < botonesAbrir.length; k++) {
-    botonesAbrir[k].addEventListener('click', function() { ventanaChat.classList.add('abierto'); });
+    botonesAbrir[k].addEventListener('click', function() { 
+        ventanaChat.classList.add('abierto'); 
+    });
 }
-document.getElementById('btnSalirChat').addEventListener('click', function() { ventanaChat.classList.remove('abierto'); });
+document.getElementById('btnSalirChat').addEventListener('click', function() { 
+    ventanaChat.classList.remove('abierto'); 
+});
 
 // Funcion que manda la pregunta a la IA y trae la respuesta
 async function mandarPregunta() {
@@ -131,4 +135,24 @@ async function mandarPregunta() {
         var datosRespuesta = await respuestaServidor.json();
         if (!respuestaServidor.ok) {
             var msgErr = datosRespuesta.error ? datosRespuesta.error.message : respuestaServidor.status;
-            throw new Error("Código "
+            throw new Error("Código " + respuestaServidor.status + ": " + msgErr);
+        }
+
+        // Mostrar la respuesta de la IA en el chat
+        var respuestaIA = datosRespuesta.choices[0].message.content;
+        document.getElementById(idEspera).innerHTML = respuestaIA;
+        listaMensajes.push({ role: "assistant", content: respuestaIA });
+        zonaMensajes.scrollTop = zonaMensajes.scrollHeight;
+
+    } catch (error) {
+        document.getElementById(idEspera).innerHTML = "Lo siento, hubo un error al conectar (" + error.message + ").";
+    }
+}
+
+// Eventos para enviar el mensaje con clic o con Enter
+document.getElementById('btnMandar').addEventListener('click', mandarPregunta);
+cajaTexto.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        mandarPregunta();
+    }
+});
