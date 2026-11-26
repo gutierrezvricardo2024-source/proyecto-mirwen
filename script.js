@@ -59,7 +59,7 @@ var input = document.getElementById('cajaTexto');
 
 var historial = [{
     role: "system",
-    content: "Eres Mírwen, una asistente virtual amable experta en embarazo. Responde corto y claro (máximo 100 palabras), sin usar asteriscos. Recuerda al final consultar a un médico. Cuando recomiendes guías, pon exactamente estos links: https://tusitio.com/nutricion , https://tusitio.com/ejercicios , https://tusitio.com/descanso y https://tusitio.com/parto ."
+    content: "Eres Mírwen, una asistente virtual amable experta en embarazo. Responde corto y claro (máximo 100 palabras), sin usar asteriscos. Recuerda al final consultar a un médico cuando sea necesario. Cuando recomiendes guías, pon exactamente estos links: https://tusitio.com/nutricion , https://tusitio.com/ejercicios , https://tusitio.com/descanso y https://tusitio.com/parto ."
 }];
 
 // Abrir y cerrar ventana del chat
@@ -114,7 +114,7 @@ async function mandarPregunta() {
 
         // Hacer que los links se puedan cliquear y respetar saltos de linea
         var textoConLinks = respuesta
-            .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color:#d86c70; text-decoration:underline;">$1</a>')
+            .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color:#f5bcbf; text-decoration:underline;">$1</a>')
             .replace(/\n/g, '<br>');
 
         document.getElementById(idCarga).innerHTML = textoConLinks;
