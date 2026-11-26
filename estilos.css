@@ -43,7 +43,7 @@ nav { display: flex; justify-content: space-between; align-items: center; height
 .tarjetita h4 { margin-bottom: 10px; }
 .tarjetita ul { list-style: none; }
 .tarjetita li { margin-bottom: 5px; color: var(--letra-gris); font-size: 0.9rem; }
-.links-videos{ margin-top: 20px; background-color: var(--verde-claro); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;}
+
 .aviso-ia { margin-top: 20px; background-color: var(--verde-claro); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
 
 /* Donaciones */
